@@ -10,33 +10,64 @@ module.exports = function controls (options) {
   })
 
   socket.on('disconnect', function () {})
+  socket.keys = {}
+
+  socket.on('button', function (value) {
+    socket.keys.button = value
+  })
+
+  socket.on('up', function (value) {
+    socket.keys.up = value
+  })
+
+  socket.on('down', function (value) {
+    socket.keys.down = value
+  })
+
+  socket.on('left', function (value) {
+    socket.keys.left = value
+  })
+
+  socket.on('right', function (value) {
+    socket.keys.right = value
+  })
 
   if (options.keyboard) {
     document.addEventListener('keydown', function (e) {
-      e.preventDefault()
       var key = keycode(e)
-      if (key === 'up' || key === 'w') {
-        socket.emit('up', true)
+      if (key === 'space') {
+        socket.keys.button = true
+      } else if (key === 'up' || key === 'w') {
+        e.preventDefault()
+        socket.keys.up = true
       } else if (key === 'down' || key === 's') {
-        socket.emit('down', true)
+        e.preventDefault()
+        socket.keys.down = true
       } else if (key === 'left' || key === 'a') {
-        socket.emit('left', true)
+        e.preventDefault()
+        socket.keys.left = true
       } else if (key === 'right' || key === 'd') {
-        socket.emit('right', true)
+        e.preventDefault()
+        socket.keys.right = true
       }
     }, false)
 
     document.addEventListener('keyup', function (e) {
-      e.preventDefault()
       var key = keycode(e)
-      if (key === 'up' || key === 'w') {
-        socket.emit('up', false)
+      if (key === 'space') {
+        socket.keys.button = false
+      } else if (key === 'up' || key === 'w') {
+        e.preventDefault()
+        socket.keys.up = false
       } else if (key === 'down' || key === 's') {
-        socket.emit('down', false)
+        e.preventDefault()
+        socket.keys.down = false
       } else if (key === 'left' || key === 'a') {
-        socket.emit('left', false)
+        e.preventDefault()
+        socket.keys.left = false
       } else if (key === 'right' || key === 'd') {
-        socket.emit('right', false)
+        e.preventDefault()
+        socket.keys.right = false
       }
     }, false)
   }

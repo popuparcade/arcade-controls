@@ -13,7 +13,7 @@
     "url": "git+https://github.com/sethvincent/arcade-controls.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sethvincent/arcade-controls/issues"
   },

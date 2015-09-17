@@ -6,26 +6,8 @@ var controls = require('./browser')({
   keyboard: true
 })
 
-var keys = {}
-
 controls.on('button', function (value) {
-  keys.button = value
-})
-
-controls.on('up', function (value) {
-  keys.up = value
-})
-
-controls.on('down', function (value) {
-  keys.down = value
-})
-
-controls.on('left', function (value) {
-  keys.left = value
-})
-
-controls.on('right', function (value) {
-  keys.right = value
+  console.log('still listengin?', value)
 })
 
 var game = require('gameloop')({
