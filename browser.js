@@ -2,15 +2,11 @@ var keycode = require('keycode')
 var socketIO = require('socket.io-client')
 
 module.exports = function controls (options) {
-  var socket = socketIO('http://localhost:3728')
   options = options || {}
+  var socket = socketIO(options.host || 'http://localhost:3729')
 
   socket.on('connect', function () {
     console.log('connected')
-  })
-
-  socket.on('hi', function (data) {
-    socket.emit('wat', 'cool')
   })
 
   socket.on('disconnect', function () {})

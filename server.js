@@ -1,21 +1,19 @@
 var GPIO = require('onoff').Gpio
 
-var app = require('http').createServer(function handler (req, res) {
+var app = module.exports = require('http').createServer(function handler (req, res) {
   res.writeHead(200)
   res.end('hi')
 }, { serveClient: false })
 
+if (require.main === module) {
+  app.listen(3728, function () {
+    console.log('running on 3728')
+  })
+}
+
 var io = require('socket.io')(app)
-app.listen(3728, function () {
-  console.log('running on 3728')
-})
 
 io.on('connection', function (socket) {
-  socket.emit('hi', { message: 'hey' })
-  socket.on('wat', function (data) {
-    console.log(data)
-  })
-
   var button = new GPIO(22, 'in', 'both')
   var up = new GPIO(17, 'in', 'both')
   var down = new GPIO(13, 'in', 'both')
