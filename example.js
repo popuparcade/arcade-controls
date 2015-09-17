@@ -37,7 +37,7 @@ var player = {
   y: 100,
   width: 20,
   height: 20,
-  speed: 4,
+  speed: 8,
   velocity: {
     x: 0,
     y: 0
