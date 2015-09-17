@@ -1,7 +1,6 @@
 var GPIO = require('onoff').Gpio
 
 var app = require('http').createServer(function handler (req, res) {
-  console.log(req.method, req.url)
   res.writeHead(200)
   res.end('hi')
 }, { serveClient: false })
