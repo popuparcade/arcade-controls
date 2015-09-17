@@ -2,7 +2,7 @@ var canvas = document.getElementById('game')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-var controls = require('./client')({
+var controls = require('./browser')({
   keyboard: true
 })
 
