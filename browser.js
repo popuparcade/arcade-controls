@@ -72,5 +72,17 @@ module.exports = function controls (options) {
     }, false)
   }
 
+  socket.on('picture', function () {
+    console.log("Let's take a picture!!!")
+  })
+
+  socket.on('processing gif', function () {
+    console.log("processing gif, hold on tight...")
+  })
+
+  socket.on('gif completed', function (gifURL) {
+    console.log("gifURL:", gifURL)
+  })
+
   return socket
 }

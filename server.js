@@ -39,5 +39,19 @@ io.on('connection', function (socket) {
     right.watch(function (err, value) {
       socket.emit('right', !!value)
     })
+
+    var gifManager = require('GifManager')
+    socket.on('get gif', function () {
+      socket.emit('picture')
+      gifManager.takePicture("test1.jpg")
+      socket.emit('picture')
+      gifManager.takePicture("test2.jpg")
+      socket.emit('picture')
+      gifManager.takePicture("test3.jpg")
+      socket.emit('processing gif')
+      var gifURL = gifManager.generateGif("test.gif")
+      socket.emit('gif completed', gifURL)
+    })
   }
 })
+
