@@ -40,7 +40,7 @@ io.on('connection', function (socket) {
       socket.emit('right', !!value)
     })
 
-    var gifManager = require('GifManager')
+    var gifManager = require('./gif-manager')
     socket.on('get gif', function () {
       socket.emit('picture')
       gifManager.takePicture("test1.jpg")
