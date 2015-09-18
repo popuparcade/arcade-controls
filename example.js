@@ -1,6 +1,10 @@
 var canvas = document.getElementById('game')
-canvas.width = window.innerWidth
+var gif = document.getElementById('gif')
+canvas.width = (0.7 * window.innerWidth)
 canvas.height = window.innerHeight
+gif.width = (window.innerWidth - canvas.width)
+gif.height = window.innerHeight
+gif.src = '/images/test.gif'
 
 var controls = require('./browser')({
   keyboard: true
