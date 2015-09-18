@@ -25,10 +25,10 @@ var player = {
     y: 0
   },
   move: function () {
-    if (keys.up) player.velocity.y = -player.speed
-    if (keys.down) player.velocity.y = player.speed
-    if (keys.right) player.velocity.x = player.speed
-    if (keys.left) player.velocity.x = -player.speed
+    if (controls.keys.up) player.velocity.y = -player.speed
+    if (controls.keys.down) player.velocity.y = player.speed
+    if (controls.keys.right) player.velocity.x = player.speed
+    if (controls.keys.left) player.velocity.x = -player.speed
   },
   update: function (dt) {
     player.x += player.velocity.x || 0
