@@ -10,6 +10,7 @@ if (require.main === module) {
 }
 
 var io = require('socket.io')(app)
+var gifManager = require('./gif-manager')()
 
 io.on('connection', function (socket) {
   if (process.platform === 'linux') {
@@ -19,10 +20,6 @@ io.on('connection', function (socket) {
     var down = new GPIO(13, 'in', 'both')
     var left = new GPIO(19, 'in', 'both')
     var right = new GPIO(26, 'in', 'both')
-
-    button.watch(function (err, value) {
-      socket.emit('button', !!value)
-    })
 
     up.watch(function (err, value) {
       socket.emit('up', !!value)
@@ -38,6 +35,31 @@ io.on('connection', function (socket) {
 
     right.watch(function (err, value) {
       socket.emit('right', !!value)
+    })
+
+    var getGif = function (value) {
+      socket.emit('picture')
+      gifManager.takePicture("test1.jpg")
+      socket.emit('picture')
+      gifManager.takePicture("test2.jpg")
+      socket.emit('picture')
+      gifManager.takePicture("test3.jpg")
+      socket.emit('processing gif')
+      var gifURL = gifManager.generateGif("test.gif")
+      socket.emit('gif completed', gifURL)
+
+      gifProcessing = false
+    }
+
+    var gifProcessing = false
+    button.watch(function (err, value) {
+      console.log("server.js: button event received: err", err)
+      console.log("server.js: value", value)
+      if (!gifProcessing && value == 1) {
+        gifProcessing = true
+        console.log("server.js: emitting socketio button event")
+        getGif(!!value)
+      }
     })
   }
 })

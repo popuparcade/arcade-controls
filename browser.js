@@ -12,10 +12,6 @@ module.exports = function controls (options) {
   socket.on('disconnect', function () {})
   socket.keys = {}
 
-  socket.on('button', function (value) {
-    socket.keys.button = value
-  })
-
   socket.on('up', function (value) {
     socket.keys.up = value
   })
@@ -71,6 +67,19 @@ module.exports = function controls (options) {
       }
     }, false)
   }
+
+  socket.on('picture', function () {
+    console.log("Let's take a picture!!!")
+  })
+
+  socket.on('processing gif', function () {
+    console.log("processing gif, hold on tight...")
+  })
+
+  socket.on('gif completed', function (gifURL) {
+    console.log("gifURL:", gifURL)
+    console.log("Press the button again to re-do your gif")
+  })
 
   return socket
 }
