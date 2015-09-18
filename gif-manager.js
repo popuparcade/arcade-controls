@@ -6,6 +6,8 @@ var execSync = require("child_process").execSync
 function GifManager(options) {
   console.log("starting gif manager")
   if (!(this instanceof GifManager)) return new GifManager(options)
+  if (!options)
+    options = {}
   this.imageDir = options.imageDir || 'images/'
 }  
 
@@ -22,9 +24,8 @@ GifManager.prototype.takePicture = function (fileName) {
 
 GifManager.prototype.generateGif = function (gifName) {
   console.log("converting pics to gif")
-  var gifURL = execSync(pwd) + '/' + this.imageDir + gifName
+  var gifURL = process.cwd() + '/' + this.imageDir + gifName
   var convertToGif = 'convert -delay 60 -loop 0 ' + this.imageDir + '*.jpg ' + gifURL
-  console.log("convert to gif command:", convertToGif)
   execSync(convertToGif)
   console.log("gif URL is", gifURL)
   return gifURL
