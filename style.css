@@ -4,8 +4,6 @@ html, body {
   overflow: hidden;
 }
 
-canvas#game {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+img#gif {
+  position: absolute;
 }
