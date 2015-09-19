@@ -33,16 +33,20 @@ module.exports = function controls (options) {
       var key = keycode(e)
       if (key === 'space') {
         socket.keys.button = true
-      } else if (key === 'up' || key === 'w') {
+      }
+      if (key === 'up' || key === 'w') {
         e.preventDefault()
         socket.keys.up = true
-      } else if (key === 'down' || key === 's') {
+      }
+      if (key === 'down' || key === 's') {
         e.preventDefault()
         socket.keys.down = true
-      } else if (key === 'left' || key === 'a') {
+      }
+      if (key === 'left' || key === 'a') {
         e.preventDefault()
         socket.keys.left = true
-      } else if (key === 'right' || key === 'd') {
+      }
+      if (key === 'right' || key === 'd') {
         e.preventDefault()
         socket.keys.right = true
       }
@@ -52,16 +56,20 @@ module.exports = function controls (options) {
       var key = keycode(e)
       if (key === 'space') {
         socket.keys.button = false
-      } else if (key === 'up' || key === 'w') {
+      }
+      if (key === 'up' || key === 'w') {
         e.preventDefault()
         socket.keys.up = false
-      } else if (key === 'down' || key === 's') {
+      }
+      if (key === 'down' || key === 's') {
         e.preventDefault()
         socket.keys.down = false
-      } else if (key === 'left' || key === 'a') {
+      }
+      if (key === 'left' || key === 'a') {
         e.preventDefault()
         socket.keys.left = false
-      } else if (key === 'right' || key === 'd') {
+      }
+      if (key === 'right' || key === 'd') {
         e.preventDefault()
         socket.keys.right = false
       }
@@ -69,23 +77,24 @@ module.exports = function controls (options) {
   }
 
   socket.on('picture', function () {
-    console.log("Let's take a picture!!!")
+    console.log('Let\'s take a picture!!!')
   })
 
   socket.on('processing gif', function () {
-    console.log("processing gif, hold on tight...")
+    console.log('processing gif, hold on tight...')
   })
 
   socket.gifURL = 'images/test.gif'
 
   socket.on('gif completed', function (gifURL) {
-    console.log("gifURL:", gifURL)
-    if (gifURL)
+    console.log('gifURL:', gifURL)
+    if (gifURL) {
       socket.gifURL = gifURL
+    }
     var gif = document.getElementById('gif')
     gif.src = '' + gifURL + '?rand=' + Math.random()
-    console.log("browser.js: gif img url set!!!, gif:", gif)
-    console.log("Press the button again to re-do your gif")
+    console.log('browser.js: gif img url set!!!, gif:', gif)
+    console.log('Press the button again to re-do your gif')
   })
 
   return socket
