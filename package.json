@@ -6,7 +6,7 @@
   "browser": "browser.js",
   "scripts": {
     "start": "node server.js",
-    "web": "budo example.js:bundle.js --live"
+    "web": "./bin/web"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/sethvincent/arcade-controls#readme",
   "dependencies": {
+    "envify": "^3.4.0",
     "gameloop": "^0.3.2",
     "keycode": "^2.1.0",
     "onoff": "^1.0.2",

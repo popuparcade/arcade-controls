@@ -84,17 +84,22 @@ module.exports = function controls (options) {
     console.log('processing gif, hold on tight...')
   })
 
-  socket.gifURL = 'images/test.gif'
+  socket.gifURL = 'images/' + process.env.ARCADE_MACHINE_ID + '-latest.gif'
 
   socket.on('gif completed', function (gifURL) {
     console.log('gifURL:', gifURL)
     if (gifURL) {
       socket.gifURL = gifURL
     }
-    var gif = document.getElementById('gif')
+    var gif = document.getElementById('player1-gif')
     gif.src = '' + gifURL + '?rand=' + Math.random()
     console.log('browser.js: gif img url set!!!, gif:', gif)
     console.log('Press the button again to re-do your gif')
+  })
+
+  socket.on('new-gif', function (gifURL) {
+    var gif = document.getElementById('player2-gif')
+    gif.src = gifURL
   })
 
   return socket
