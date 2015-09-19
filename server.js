@@ -67,7 +67,7 @@ io.on('connection', function (socket) {
 
     function sendGif () {
       var formData = { file: fs.createReadStream(process.cwd() + '/images/' + process.env.ARCADE_MACHINE_ID + '-latest.gif') }
-      request.post({ url: 'http://172.17.18.119:4444/gif', formData: formData }, function (err, res, body) {
+      request.post({ url: 'http://172.20.10.2:4444/gif', formData: formData }, function (err, res, body) {
         if (err) { return console.error('upload failed:', err) }
       })
     }
