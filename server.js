@@ -63,14 +63,12 @@ io.on('connection', function (socket) {
       socket.emit('gif completed', gifURL)
       gifProcessing = false
       sendGif()
-      console.log('weeee')
     }
 
     function sendGif () {
       var formData = { file: fs.createReadStream(process.cwd() + '/images/' + process.env.ARCADE_MACHINE_ID + '-latest.gif') }
       request.post({ url: 'http://10.0.0.4:4444/gif', formData: formData }, function (err, res, body) {
         if (err) { return console.error('upload failed:', err) }
-        socket.broadcast.emit('new-gif', 'http://10.0.0.4:4444/static/' + process.env.ARCADE_MACHINE_ID + '-latest.gif'  + '?rand=' + Math.random())
       })
     }
   }
