@@ -76,8 +76,15 @@ module.exports = function controls (options) {
     console.log("processing gif, hold on tight...")
   })
 
+  socket.gifURL = 'images/test.gif'
+
   socket.on('gif completed', function (gifURL) {
     console.log("gifURL:", gifURL)
+    if (gifURL)
+      socket.gifURL = gifURL
+    var gif = document.getElementById('gif')
+    gif.src = '' + gifURL + '?rand=' + Math.random()
+    console.log("browser.js: gif img url set!!!, gif:", gif)
     console.log("Press the button again to re-do your gif")
   })
 

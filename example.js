@@ -4,15 +4,12 @@ canvas.width = (0.7 * window.innerWidth)
 canvas.height = window.innerHeight
 gif.width = (window.innerWidth - canvas.width)
 gif.height = window.innerHeight
-gif.src = '/images/test.gif'
 
 var controls = require('./browser')({
   keyboard: true
 })
 
-controls.on('button', function (value) {
-  console.log('still listengin?', value)
-})
+gif.src = controls.gifURL
 
 var game = require('gameloop')({
   renderer: canvas.getContext('2d')
