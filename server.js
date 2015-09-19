@@ -1,3 +1,6 @@
+var fs = require('fs')
+var request = require('request')
+
 var app = module.exports = require('http').createServer(function handler (req, res) {
   res.writeHead(200)
   res.end('hi')
@@ -37,29 +40,36 @@ io.on('connection', function (socket) {
       socket.emit('right', !!value)
     })
 
-    var getGif = function (value) {
-      socket.emit('picture')
-      gifManager.takePicture("test1.jpg")
-      socket.emit('picture')
-      gifManager.takePicture("test2.jpg")
-      socket.emit('picture')
-      gifManager.takePicture("test3.jpg")
-      socket.emit('processing gif')
-      var gifURL = gifManager.generateGif("test.gif")
-      socket.emit('gif completed', gifURL)
-
-      gifProcessing = false
-    }
-
     var gifProcessing = false
     button.watch(function (err, value) {
-      console.log("server.js: button event received: err", err)
-      console.log("server.js: value", value)
-      if (!gifProcessing && value == 1) {
+      console.log('server.js: button event received: err', err)
+      console.log('server.js: value', value)
+      if (!gifProcessing && value === 1) {
         gifProcessing = true
-        console.log("server.js: emitting socketio button event")
-        getGif(!!value)
+        console.log('server.js: emitting socketio button event')
+        makeGif(!!value)
       }
     })
+
+    function makeGif (value) {
+      socket.emit('picture')
+      gifManager.takePicture('test1.jpg')
+      socket.emit('picture')
+      gifManager.takePicture('test2.jpg')
+      socket.emit('picture')
+      gifManager.takePicture('test3.jpg')
+      socket.emit('processing gif')
+      var gifURL = gifManager.generateGif('test.gif')
+      socket.emit('gif completed', gifURL)
+      gifProcessing = false
+      sendGif()
+    }
+
+    function sendGif () {
+      var formData = { gif: fs.createReadStream(process.cwd() + '/images/test.gif') }
+      request.post({ url: 'http://localhost:4444/gif', formData: formData }, function (err, res, body) {
+        if (err) { return console.error('upload failed:', err) }
+      })
+    }
   }
 })
