@@ -8,12 +8,6 @@ module.exports = function (options) {
     res.end('hi')
   }, { serveClient: false })
 
-  if (require.main === module) {
-    app.listen(3728, function () {
-      console.log('running on 3728')
-    })
-  }
-
   var io = require('socket.io')(app)
   var gifManager = require('./gif-manager')()
 
