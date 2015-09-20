@@ -3,7 +3,7 @@ var request = require('request')
 
 module.exports = function (options) {
   var remoteHost = options.remoteHost || 'http://localhost:4444'
-  var app = module.exports = require('http').createServer(function handler (req, res) {
+  var app = require('http').createServer(function handler (req, res) {
     res.writeHead(200)
     res.end('hi')
   }, { serveClient: false })
